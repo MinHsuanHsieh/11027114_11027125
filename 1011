@@ -1,0 +1,9 @@
+10/11進度
+主要爬蟲:
+spotify 雖然出現Listening on 8888 但訪問連結時(http://localhost:8888、http://127.0.0.1:888) 網站都顯示錯誤
+tixcraft拓元售票系統  目前可以爬取最新的節目名稱及日期 正在爬取更詳細的節目介紹
+klook 加了user-agent還是被網站禁止訪問
+kktix 目前可以爬取最新的節目名稱及日期 也正在爬取更詳細的節目介紹
+架好server了!
+也寫好收到訊息相對應的回答
+但Webhook URL無法連結成功
