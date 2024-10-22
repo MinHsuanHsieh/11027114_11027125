@@ -1,3 +1,55 @@
+def mbti_card(mbti): 
+    res = {
+        "type": "bubble",
+        "hero": {
+            "type": "image",
+            "url": mbti['url'],
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+            "type": "uri",
+            "uri": "https://line.me/"
+            }
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+            {
+                "type": "text",
+                "weight": "bold",
+                "size": "xl",
+                "text": mbti['cname']
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "sm",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": mbti['feature'],
+                        "wrap": True,
+                        "color": "#666666",
+                        "size": "sm",
+                        "flex": 5
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        }
+    }
+    return res
+
 def card(track):
   res = {
     "type": "bubble",
@@ -67,11 +119,11 @@ def card(track):
   }
   return res
 
-def SearchSongs(search_result):
-  res = {
+def mbti_song(mbti, search_result):
+  res = { 
     "type": "carousel",
     "contents": [
-      card(track) for track in search_result["tracks"]
-    ]
+      mbti_card(mbti)
+    ] + [card(track) for track in search_result["tracks"][:5]]
   }
   return res

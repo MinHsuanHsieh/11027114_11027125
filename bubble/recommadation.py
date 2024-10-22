@@ -34,7 +34,37 @@ def card(track):
               "flex": 0
             }
           ]
-        }
+        },
+        {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "MBTI",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 1
+              },
+              {
+                "type": "text",
+                "text": track['mbti'],
+                "wrap": True,
+                "color": "#666666",
+                "size": "sm",
+                "flex": 5
+              }
+            ]
+          }
+        ]
+      }
       ]
     },
     "footer": {
@@ -67,11 +97,11 @@ def card(track):
   }
   return res
 
-def SearchSongs(search_result):
+def recommendation_card(search_result):
   res = {
     "type": "carousel",
     "contents": [
-      card(track) for track in search_result["tracks"]
+      card(track) for track in search_result
     ]
   }
   return res

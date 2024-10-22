@@ -81,6 +81,7 @@ def AtristCard(search_result):
                 {
                     "type": "button",
                     "style": "secondary",
+                    "color": "#E6CFE6",
                     "action": {
                     "type": "uri",
                     "label": "spotify url",
@@ -118,6 +119,30 @@ def AtristCard(search_result):
                     "layout": "baseline",
                     "flex": 1,
                     "contents": []
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "MBTI",
+                        "wrap": True,
+                        "weight": "bold",
+                        "size": "sm",
+                        "flex": 1,
+                        "decoration": "none",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": search_result.get("album mbti") if search_result.get("album mbti") else "No mbti found",
+                        "wrap": True,
+                        "weight": "bold",
+                        "size": "sm",
+                        "flex": 2
+                    }
+                    ]
                 }
                 ]
             },
@@ -130,7 +155,7 @@ def AtristCard(search_result):
                     "type": "button",
                     "flex": 2,
                     "style": "primary",
-                    "color": "#aaaaaa",
+                    "color": "#7384C0",
                     "action": {
                     "type": "uri",
                     "label": "spotify url",
@@ -142,36 +167,45 @@ def AtristCard(search_result):
             },
             {
             "type": "bubble",
-            "body": {
+            "hero": {
+                "type": "image",
+                "url": "https://images-ext-1.discordapp.net/external/QjxAdBroddxJsrNwe4AaEKfzmpqNQbok0Ua8zIxRqe8/https/i.pinimg.com/736x/1c/92/3d/1c923d4bf360967bef35df74c6d1bef8.jpg?format=webp&width=1108&height=1108",
+                "size": "full",
+                "aspectRatio": "20:13",
+                "aspectMode": "cover",
+                "action": {
+                "type": "message",
+                "label": "HI",
+                "text": "Similar Artists"
+                }
+            },
+            "footer": {
                 "type": "box",
-                "layout": "horizontal",
-                "spacing": "xxl",
+                "layout": "vertical",
                 "contents": [
                 {
-                    "type": "text",
-                    "text": "Similar Artists",
-                    "wrap": True,
-                    "weight": "bold",
-                    "size": "4xl",
-                    "decoration": "none",
-                    "gravity": "center",
+                    "type": "button",
+                    "margin": "xxl",
                     "action": {
                     "type": "message",
                     "label": "Similar Artists",
                     "text": "Similar Artists"
                     },
-                    "margin": "lg"
+                    "style": "secondary",
+                    "color": "#E6CFE6"
+                },
+                {
+                    "type": "button",
+                    "style": "primary",
+                    "margin": "xxl",
+                    "action": {
+                    "type": "message",
+                    "label": "Concert information",
+                    "text": "Concert information"
+                    },
+                    "color": "#7384C0"
                 }
-                ],
-                "borderWidth": "normal",
-                "cornerRadius": "xxl",
-                "backgroundColor": "#DCDCDC",
-                "paddingEnd": "xxl"
-            },
-            "styles": {
-                "body": {
-                "separator": True
-                }
+                ]
             }
             }
         ]

@@ -1,6 +1,7 @@
-from flask import Flask, redirect, request, jsonify, url_for, g, render_template
+from flask import Flask, redirect, request, jsonify, url_for, g, render_template, session
 import secrets
 import urllib.parse
+from pymongo import MongoClient
 import requests
 import base64
 from flask_pymongo import PyMongo
@@ -8,16 +9,18 @@ import spotipy
 from multiprocessing import Process
 import os
 
+
 os.chdir('/home/cynthia/chat_bot')
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/spotify"
 mongo = PyMongo(app)
+app.secret_key = os.urandom(24)  # 使用 os.urandom 生成一個隨機的字串作為 secret_key
 
 # Spotify API 資訊
 client_id = '777f43889e4643c1928a8a338de98082'
 client_secret = '078fc9716eaf484b97f867f9875272b3'
-redirect_uri = 'https://cynweb.lab214b.uk:10000/callback'
+redirect_uri = 'https://cynweb.lab214b.uk:5001/callback'
 
 #登入路由，生成state和scope，然後重定向到Spotify登入頁面
 @app.route('/')
@@ -41,7 +44,17 @@ def root():
 def callback():
     code = request.args.get('code')
     state = request.args.get('state', '')
-    _, lineID = state.split('|', 1)  # 從state解析出lineID
+    
+    if not code:
+        print("Error: No authorization code received.")
+        return jsonify(error="No authorization code received"), 400
+    
+    try:
+        _, lineID = state.split('|', 1)
+    except ValueError:
+        print("Error: Invalid state parameter format.")
+        return jsonify(error="Invalid state parameter format"), 400
+    
     auth_token_url = 'https://accounts.spotify.com/api/token'
     payload = {
         'grant_type': 'authorization_code',
@@ -49,17 +62,33 @@ def callback():
         'redirect_uri': redirect_uri
     }
     headers = {
-        'Authorization': f'Basic {base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()}'
+        'Authorization': f'Basic {base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()}',
+        'Content-Type': 'application/x-www-form-urlencoded'
     }
+    
     response = requests.post(auth_token_url, data=payload, headers=headers)
+    
     if response.status_code == 200:
-        access_token = response.json()['access_token']
-        get_user_data(access_token, lineID)
+        access_token = response.json().get('access_token')
+        
+        if not access_token:
+            print("Error: Access token not found in response.")
+            return jsonify(error="Failed to retrieve access token"), 400
+        
+        print(f"Access token: {access_token}")
+        try:
+            user_data = get_user_data(access_token, lineID)
+            if user_data is None:
+                return jsonify(error="Fail to get your data!!! Please make sure you enter the right email."), 500
+            session['user'] = lineID  # 假設你將用戶資料儲存在 session 中
+        except Exception as e:
+            print(f"Error retrieving user data: {e}")
+            return jsonify(error="Fail to get your data!!! Please make sure you enter the right email."), 500
+        
         return render_template('successful_login.html')
     else:
-        error = response.json().get('error')
-        if error:
-            print(f"Error {error.get('status')}: {error.get('message')}")   
+        error_details = response.json().get('error', 'Unknown error')
+        print(f"Error retrieving access token, status code {response.status_code}, details: {error_details}")
         return jsonify(error="Failed to retrieve access token"), 400
 
 
@@ -71,6 +100,7 @@ def get_user_data(access_token, lineID):
     }
     response = requests.get(user_info_url, headers=headers)
     # 檢查響應是否成功
+    print(f'!!!!!!!!!!!!!!!!!!!!!!!!!!!!{response.status_code}')
     if response.status_code == 200:
         user_data = response.json()  # 取得使用者資料
         # 創建 Spotify 物件
@@ -101,6 +131,11 @@ def get_user_data(access_token, lineID):
                 print(f"{track['name']} - {track['artists'][0]['name']}")
             print("success find top tracks")
         
+        client = MongoClient('mongodb://localhost:27017/')
+        # 選擇資料庫
+        db1 = client['spotify']
+        # 選擇集合（collection）
+        collection1 = db1['users']
         user = {
             'line_user_id': lineID,
             'access_token': access_token,
@@ -110,15 +145,15 @@ def get_user_data(access_token, lineID):
         }
         if existing_user is None:
             # 不存在的話，創建使用者資料
-            mongo.db.users.insert_one(user)
+            collection1.insert_one(user)
             print("success insert user data")
         else:
             # 已存在的話，更新使用者資料
-            mongo.db.users.update_one({'spotify_user_id': user_id}, {'$set': user})
+            collection1.update_one({'spotify_user_id': user_id}, {'$set': user})
             print("success update user data")
         return user,jsonify(user_data=user_data)
     else:
-        return jsonify(error="Failed to retrieve user data"), 400
+        return None
 
 
 def run_app():

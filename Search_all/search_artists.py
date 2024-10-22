@@ -1,7 +1,8 @@
 import requests
 import spotify_accesstoken
-from Search_all.search_album import search_album
+from Search_all.search_album import search_album, search_albumtrack
 from Search_all.search_similarartists import search_similarartists
+from pymongo import MongoClient
 def Search_spotify(search_keyword, search_type):
     
     access_token = spotify_accesstoken.get_access_token()
@@ -36,6 +37,29 @@ def Search_spotify(search_keyword, search_type):
             
             similar_artists = search_similarartists(id)
             lastest_album = search_album(id)
+            album_id = lastest_album['id']
+            album_tracks = search_albumtrack(album_id)
+            client = MongoClient('mongodb://localhost:27017/')
+            # 選擇資料庫
+            db1 = client['spotify_data']
+            # 選擇集合（collection）
+            collection1 = db1['albums']
+            document = {
+                'artist name': artist_name,
+                'lastest album': lastest_album,
+                'album tracks': album_tracks
+            }
+            
+            if collection1.find_one({'artist name': artist_name}): 
+                collection1.update_one(
+                    {'artist name': artist_name},
+                    {'$set': {
+                        'lastest album': lastest_album
+                    }}
+                )
+            else:
+                collection1.insert_one(document)
+            
             #print(f"Artist Name: {artist_name}, Spotify URL: {spotify_url}, Geners: {geners}, Images: {image}, Popularity: {popularity}, Similar Artists: {similar_artists}, Lastest Album: {lastest_album}")
             return {
                 'artist name': artist_name,
@@ -47,5 +71,6 @@ def Search_spotify(search_keyword, search_type):
                 'lastest album': lastest_album
             }
         
+
         else:
             return None

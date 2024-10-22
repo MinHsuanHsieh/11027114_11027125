@@ -30,7 +30,8 @@ def card(similar_artist):
             "contents": [
               {
                 "type": "button",
-                "style": "primary",
+                "style": "secondary",
+                "color": "#E6CFE6",
                 "action": {
                   "type": "message",
                   "label": "Information",
@@ -44,7 +45,8 @@ def card(similar_artist):
                   "label": "Spotify URL",
                   "uri": similar_artist['spotify_url']
                 },
-                "style": "link"
+                "style": "primary",
+                "color": "#7384C0"
               }
             ]
           }

@@ -51,6 +51,12 @@ class User:
         for parameter in self.global_args[function_name]:
             self.global_args[function_name][parameter] = []
 
+    @staticmethod
+    def clear_all():
+        gv.SESSION.flushdb()
+
+User.clear_all()
+
 
 class Sub_Function:
     def __init__(self, function_name: str):
@@ -88,12 +94,10 @@ class Dialog_Manager:
             gv.g.current_user = user
             user.current_input = message
             Dialog_Manager.isCommand = False
-
             
             # 初始化全域變數
             if user.global_args == {}:
                 user.global_args = copy.deepcopy(Dialog_Manager._global_args_map)
-
 
             # 解碼使用者輸入
             for key, value in Dialog_Manager._re_map.items():
@@ -139,6 +143,8 @@ class Dialog_Manager:
                     result = Dialog_Manager._callback_map[user.state]['function'](**user.args)
                     if result is None or result == []:
                         reply_array.append([TextSendMessage(text='暫無此功能')])
+                    elif result == 'abandon':
+                        pass
                     else:
                         reply_array.append(result)
                         
@@ -190,3 +196,7 @@ class Dialog_Manager:
             Dialog_Manager._global_args_map[function_name] = {}
         Dialog_Manager._global_args_map[function_name][parameter] = value
 
+    @staticmethod
+    def get_global_args(function_name: str, parameter: str):
+        # 獲取指定的全域變數，如果不存在則返回 None
+        return Dialog_Manager._global_args_map.get(function_name, {}).get(parameter)

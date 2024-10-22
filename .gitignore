@@ -1,2 +1,3 @@
 *.pyc
 database/.~lock.spotifyuser.xlsx#
+chromedriver-linux64/

@@ -18,6 +18,7 @@ def search_album(id):
             lastest_album = []
             album_info = {
                 'name': item['name'],
+                'id': item['id'],
                 'spotify_url': item['external_urls']['spotify'],
                 'image': item['images'][0]['url'] if item['images'] else None
             }
@@ -26,7 +27,34 @@ def search_album(id):
         else:
             return 'No album found'
         
+def search_albumtrack(id):
+    access_token = spotify_accesstoken.get_access_token()
+
+    # 使用訪問令牌訪問 Spotify Web API
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+    }
+    
+    SEARCH_URL = f'https://api.spotify.com/v1/albums/{id}/tracks'
+    response = requests.get(SEARCH_URL, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        track = []
+        if data['items']:
+            for item in data['items']:
+                track_info = {
+                    'name': item['name'],
+                    'id': item['id'],
+                }
+                
+                track.append(track_info)
+                
+            print(track)
+            return track
+        else:
+            return 'No track found'
             
+#search_albumtrack('4aawyAB9vmqN3uQ7FjRGTy')
                 
                 
     

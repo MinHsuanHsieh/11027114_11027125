@@ -9,7 +9,7 @@ def Searchoption():
                     "size": "full",
                     "aspectRatio": "20:13",
                     "aspectMode": "cover",
-                    "url": "https://i.pinimg.com/564x/5e/4e/91/5e4e915572dc9b9a00a4b39e8ab77102.jpg"
+                    "url": "https://i.pinimg.com/564x/69/59/74/695974fd7641f921b6ca1e64c14250c9.jpg"
                 },
                 "body": {
                     "type": "box",
@@ -18,7 +18,7 @@ def Searchoption():
                     "contents": [
                     {
                         "type": "text",
-                        "text": "Search for concerts",
+                        "text": "Search By Date",
                         "wrap": True,
                         "weight": "bold",
                         "size": "xl"
@@ -29,7 +29,7 @@ def Searchoption():
                         "contents": [
                         {
                             "type": "text",
-                            "text": "查詢演唱會資訊",
+                            "text": "依日期查詢(結果為選擇日期前後一週資訊)",
                             "wrap": True,
                             "weight": "bold",
                             "size": "md",
@@ -41,7 +41,7 @@ def Searchoption():
                     "action": {
                     "type": "message",
                     "label": "action",
-                    "text": "Search for concerts"
+                    "text": "Search By Date"
                     }
                 },
                 "footer": {
@@ -54,9 +54,10 @@ def Searchoption():
                         "style": "primary",
                         "color": "#7384C0",
                         "action": {
-                        "type": "message",
+                        "type": "datetimepicker",
                         "label": "select",
-                        "text": "Search for concerts"
+                        "mode": "date",
+                        "data": "Search By Date"
                         }
                     }
                     ]
@@ -69,7 +70,7 @@ def Searchoption():
                     "size": "full",
                     "aspectRatio": "20:13",
                     "aspectMode": "cover",
-                    "url": "https://i.pinimg.com/564x/9d/a5/be/9da5be9dcd2e03b6b9856857face1dea.jpg"
+                    "url": "https://i.pinimg.com/564x/68/30/3c/68303c4b7bab8b335f9600f61f57523b.jpg"
                 },
                 "body": {
                     "type": "box",
@@ -78,7 +79,7 @@ def Searchoption():
                     "contents": [
                     {
                         "type": "text",
-                        "text": "Search for artists",
+                        "text": "Search By Keywords",
                         "wrap": True,
                         "weight": "bold",
                         "size": "xl"
@@ -90,7 +91,7 @@ def Searchoption():
                         "contents": [
                         {
                             "type": "text",
-                            "text": "查詢藝人資訊",
+                            "text": "依關鍵字查詢",
                             "wrap": True,
                             "weight": "bold",
                             "size": "md",
@@ -101,8 +102,8 @@ def Searchoption():
                     ],
                     "action": {
                     "type": "message",
-                    "label": "Search for artists",
-                    "text": "Search for artists"
+                    "label": "action",
+                    "text": "Search By Keywords"
                     }
                 },
                 "footer": {
@@ -118,7 +119,7 @@ def Searchoption():
                         "action": {
                         "type": "message",
                         "label": "select",
-                        "text": "Search for artists"
+                        "text": "Search By Keywords"
                         }
                     }
                     ]
@@ -131,7 +132,7 @@ def Searchoption():
                     "size": "full",
                     "aspectRatio": "20:13",
                     "aspectMode": "cover",
-                    "url": "https://i.pinimg.com/564x/a6/cf/0c/a6cf0cb8f9b4386a3a13068095eb7449.jpg"
+                    "url": "https://i.pinimg.com/564x/ef/9c/78/ef9c7833e4581b811516b20a06bb20c8.jpg"
                 },
                 "body": {
                     "type": "box",
@@ -140,7 +141,7 @@ def Searchoption():
                     "contents": [
                     {
                         "type": "text",
-                        "text": "Search for songs",
+                        "text": "Show Favorites", 
                         "wrap": True,
                         "weight": "bold",
                         "size": "xl"
@@ -152,7 +153,7 @@ def Searchoption():
                         "contents": [
                         {
                             "type": "text",
-                            "text": "查詢歌曲資訊",
+                            "text": "查看收藏清單",
                             "wrap": True,
                             "weight": "bold",
                             "size": "md",
@@ -163,8 +164,8 @@ def Searchoption():
                     ],
                     "action": {
                     "type": "message",
-                    "label": "Search for songs",
-                    "text": "Search for songs"
+                    "label": "action",
+                    "text": "Show Favorites"
                     }
                 },
                 "footer": {
@@ -180,12 +181,13 @@ def Searchoption():
                         "action": {
                         "type": "message",
                         "label": "select",
-                        "text": "Search for songs"
+                        "text": "Show Favorites"
                         }
                     }
                     ]
                 }
                 }
+                
             ]
             }
     return res
