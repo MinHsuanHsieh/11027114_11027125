@@ -81,7 +81,7 @@ def AtristCard(search_result):
                 {
                     "type": "button",
                     "style": "secondary",
-                    "color": "#E6CFE6",
+                    "color": "#D0D0D0",
                     "action": {
                     "type": "uri",
                     "label": "spotify url",
@@ -155,7 +155,7 @@ def AtristCard(search_result):
                     "type": "button",
                     "flex": 2,
                     "style": "primary",
-                    "color": "#7384C0",
+                    "color": "#000000",
                     "action": {
                     "type": "uri",
                     "label": "spotify url",
@@ -192,7 +192,7 @@ def AtristCard(search_result):
                     "text": "Similar Artists"
                     },
                     "style": "secondary",
-                    "color": "#E6CFE6"
+                    "color": "#D0D0D0"
                 },
                 {
                     "type": "button",
@@ -203,7 +203,7 @@ def AtristCard(search_result):
                     "label": "Concert information",
                     "text": "Concert information"
                     },
-                    "color": "#7384C0"
+                    "color": "#000000"
                 }
                 ]
             }

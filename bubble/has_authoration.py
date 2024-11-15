@@ -44,7 +44,7 @@ def card():
             {
                 "type": "button",
                 "style": "secondary",
-                "color": "#E6CFE6",
+                "color": "#D0D0D0",
                 "height": "md",
                 "action": {
                 "type": "message",
@@ -58,7 +58,7 @@ def card():
             {
                 "type": "button",
                 "style": "primary",
-                "color": "#7384C0",
+                "color": "#000000",
                 "height": "md",
                 "action": {
                 "type": "message",
@@ -71,7 +71,7 @@ def card():
             {
                 "type": "button",
                 "style": "primary",
-                "color": "#E6CFE6",
+                "color": "#D0D0D0",
                 "height": "md",
                 "action": {
                 "type": "message",
@@ -134,7 +134,7 @@ def card2():
             {
                 "type": "button",
                 "style": "secondary",
-                "color": "#E6CFE6",
+                "color": "#D0D0D0",
                 "height": "md",
                 "action": {
                 "type": "message",
@@ -148,7 +148,7 @@ def card2():
             {
                 "type": "button",
                 "style": "primary",
-                "color": "#7384C0",
+                "color": "#000000",
                 "height": "md",
                 "action": {
                 "type": "message",
@@ -161,7 +161,7 @@ def card2():
             {
                 "type": "button",
                 "style": "secondary",
-                "color": "#E6CFE6",
+                "color": "#D0D0D0",
                 "height": "md",
                 "action": {
                 "type": "message",

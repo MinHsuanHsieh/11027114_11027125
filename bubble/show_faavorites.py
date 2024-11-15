@@ -27,7 +27,7 @@ def show():
                 {
                     "type": "button",
                     "style": "primary",
-                    "color": "#7384C0",
+                    "color": "#000000",
                     "action": {
                     "type": "message",
                     "label": "Show Favorites",

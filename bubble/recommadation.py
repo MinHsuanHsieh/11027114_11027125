@@ -75,7 +75,7 @@ def card(track):
         {
           "type": "button",
           "style": "secondary",
-          "color": "#E6CFE6",
+          "color": "#D0D0D0",
           "action": {
             "type": "message",
             "label": "artist information",
@@ -90,7 +90,7 @@ def card(track):
             "uri": track['spotify url']
           },
           "style": "primary",
-          "color": "#7384C0"
+          "color": "#000000"
         }
       ]
     }

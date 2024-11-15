@@ -58,7 +58,7 @@ def result(title, link, image, date, index):
             {
                 "type": "button",
                 "style": "secondary",
-                "color": "#E6CFE6",
+                "color": "#D0D0D0",
                 "height": "sm",
                 "action": {
                 "type": "uri",
@@ -69,7 +69,7 @@ def result(title, link, image, date, index):
             {
                 "type": "button",
                 "style": "primary",
-                "color": "#7384C0",
+                "color": "#000000",
                 "height": "sm",
                 "action": {
                 "type": "message",

@@ -38,7 +38,7 @@ def card( url ):
                     "uri": url
                     },
                     "style": "secondary",
-                    "color": "#E6CFE6"
+                    "color": "#D0D0D0"
                 }
                 ]
             }
@@ -96,7 +96,7 @@ def card( url ):
                     {
                         "type": "button",
                         "style": "primary",
-                        "color": "#7384C0",
+                        "color": "#000000",
                         "height": "sm",
                         "action": {
                         "type": "message",

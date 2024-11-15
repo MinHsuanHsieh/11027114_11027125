@@ -52,7 +52,7 @@ def Searchoption():
                     {
                         "type": "button",
                         "style": "primary",
-                        "color": "#7384C0",
+                        "color": "#000000",
                         "action": {
                         "type": "message",
                         "label": "select",
@@ -114,7 +114,7 @@ def Searchoption():
                         "type": "button",
                         "flex": 2,
                         "style": "secondary",
-                        "color": "#E6CFE6",
+                        "color": "#D0D0D0",
                         "action": {
                         "type": "message",
                         "label": "select",
@@ -176,7 +176,7 @@ def Searchoption():
                         "type": "button",
                         "flex": 2,
                         "style": "primary",
-                        "color": "#7384C0",
+                        "color": "#000000",
                         "action": {
                         "type": "message",
                         "label": "select",
